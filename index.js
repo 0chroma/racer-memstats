@@ -16,16 +16,16 @@ var memStats;
 
     if(options && options.collection){
       var collection = model.get(options.collection);
-      console.log(breakdownByField(collection));
+      console.log(collectionBreakdownByField(collection));
     }else if(options && options.field){
-      console.log(breakdownByField(model, options.field, collections));
+      console.log(storeBreakdownByField(model, options.field, collections));
     }else{
-      console.log(breakdownByCollection(model, collections));
+      console.log(storeBreakdownByCollection(model, collections));
     }
-  }
+  };
 
-  function breakdownByField(collection){
-    var fieldTotals = {}
+  function collectionBreakdownByField(collection){
+    var fieldTotals = {};
     _.values(collection).forEach(function(doc){
       Object.keys(doc).forEach(function(key){
         if(!fieldTotals[key])
@@ -41,20 +41,20 @@ var memStats;
     return fieldTotals;
   }
 
-  function breakdownByField(model, field, collections){
+  function storeBreakdownByField(model, field, collections){
     var finalBreakdown = {};
     collections.forEach(function(collection){
-      var breakdown = breakdownByField(model.get(collection));
+      var breakdown = collectionBreakdownByField(model.get(collection));
       var total = breakdown[field] || 0;
       finalBreakdown[collection] = total;
     });
     return finalBreakdown;
   }
 
-  function breakdownByCollection(model, collections){
+  function storeBreakdownByCollection(model, collections){
     var finalBreakdown = {};
     collections.forEach(function(collection){
-      var breakdown = breakdownByField(model.get(collection));
+      var breakdown = collectionBreakdownByField(model.get(collection));
       var total = _.values(breakdown).reduce(function(a, b){ return a + b; }, 0);
       finalBreakdown[collection] = total;
     });
@@ -62,7 +62,7 @@ var memStats;
   }
 
   function filterCollectionList(collections){
-    var isChar = /[a-zA-Z]/
+    var isChar = /[a-zA-Z]/;
     return _.filter(collections, function(collection){
       var c = collection.charAt(0);
       return isChar.test(c);
