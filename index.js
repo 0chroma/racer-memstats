@@ -26,7 +26,7 @@ var memStats;
     }
     
     result.total = _.values(result).reduce(function(a, b){ return a+b; }, 0);
-    console.log(result);
+    return result;
   };
 
   function collectionBreakdownByField(collection){
