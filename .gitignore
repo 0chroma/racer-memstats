@@ -1,0 +1,4 @@
+browser.js
+*.swp
+node_modules
+npm-debug.log
