@@ -35,7 +35,7 @@ var memStats;
         // server end would also likely mitigate the impact when sending it
         // through the network.
         //TODO: ask nate if share documents have the class optimization applied to them
-        fieldTotals[key] = sizeof(doc[key]);
+        fieldTotals[key] += sizeof(doc[key]);
       });
     });
     return fieldTotals;

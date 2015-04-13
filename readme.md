@@ -10,7 +10,7 @@ Injecting into the page
 <script src="https://hflw.github.io/racer-memstats/browser.js"></script>
 ```
 
-```
+```javascript
 (function(){ var s = document.createElement('script'); s.src='https://hflw.github.io/racer-memstats/browser.js'; document.head.appendChild(s);})();
 ```
 
