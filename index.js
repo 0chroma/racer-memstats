@@ -12,7 +12,7 @@ var memStats;
    *   - if you specify neither, you'll get a breakdown of memory usage by collection
    */
   memStats = function(model, options){
-    var collections = filterCollectionList(model.get());
+    var collections = filterCollectionList(Object.keys(model.get()));
 
     if(options && options.collection){
       var collection = model.get(options.collection);
