@@ -1,7 +1,7 @@
 var sizeof = require('object-sizeof');
 var _ = require('lodash');
 
-var perfStats;
+var memStats;
 
 (function(){
   /*
@@ -11,7 +11,7 @@ var perfStats;
    *   - options.field: specify this to measure how much memory a given field uses across all collections
    *   - if you specify neither, you'll get a breakdown of memory usage by collection
    */
-  perfStats = function(model, options){
+  memStats = function(model, options){
     var collections = filterCollectionList(model.get());
 
     if(options && options.collection){
@@ -42,22 +42,22 @@ var perfStats;
   }
 
   function breakdownByField(model, field, collections){
-    var finalBreakdown = {}
+    var finalBreakdown = {};
     collections.forEach(function(collection){
       var breakdown = breakdownByField(model.get(collection));
       var total = breakdown[field] || 0;
       finalBreakdown[collection] = total;
-    })
+    });
     return finalBreakdown;
   }
 
   function breakdownByCollection(model, collections){
-    var finalBreakdown = {}
+    var finalBreakdown = {};
     collections.forEach(function(collection){
       var breakdown = breakdownByField(model.get(collection));
       var total = _.values(breakdown).reduce(function(a, b){ return a + b; }, 0);
       finalBreakdown[collection] = total;
-    })
+    });
     return finalBreakdown;
   }
 
@@ -66,9 +66,9 @@ var perfStats;
     return _.filter(collections, function(collection){
       var c = collection.charAt(0);
       return isChar.test(c);
-    })
+    });
   }
 
-})()
+})();
 
-module.exports = window.racerPerfStats = perfStats;
+module.exports = window.racerMemStats = memStats;
