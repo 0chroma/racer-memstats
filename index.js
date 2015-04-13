@@ -13,15 +13,20 @@ var memStats;
    */
   memStats = function(model, options){
     var collections = filterCollectionList(Object.keys(model.get()));
+    
+    var result;
 
     if(options && options.collection){
       var collection = model.get(options.collection);
-      console.log(collectionBreakdownByField(collection));
+      result = collectionBreakdownByField(collection);
     }else if(options && options.field){
-      console.log(storeBreakdownByField(model, options.field, collections));
+      result = storeBreakdownByField(model, options.field, collections);
     }else{
-      console.log(storeBreakdownByCollection(model, collections));
+      result = storeBreakdownByCollection(model, collections);
     }
+    
+    result.total = _.values(result).reduce(function(a, b){ return a+b; }, 0);
+    console.log(result);
   };
 
   function collectionBreakdownByField(collection){
