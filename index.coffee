@@ -65,4 +65,9 @@ FieldValue = {
     sizeof fieldvalue[1]
 }
 
-module.exports = window.racerMemStats = {Model, Collection, Document, _, sizeof}
+Format = {
+  sortedTable: (resultObj) ->
+    console.table _(resultObj).pairs().sortBy((n) -> n[1]).value()
+}
+
+module.exports = window.racerms = {Model, Collection, Document, Format, _, sizeof}
