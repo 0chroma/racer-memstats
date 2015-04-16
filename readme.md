@@ -19,7 +19,8 @@ Usage
 
  - Make the browser.js file with `make`
  - Require racer-memstats in the page (not recommended to be used in prod)
- - Call `racerMemStats(model)` (where `model` is a reference to your model)
-   - `racerMemStats(model)` will give you memory breakdown by collection
-   - `racerMemStats(model, {field: 'fieldName'})` will give you memory breakdown by collection for a given field
-   - `racerMemStats(model, {collection: 'collectionName'})` will give you memory breakdown by field for a given collection
+ - `racerMemStats.Model.getCollectionSizes(model)` will give you memory breakdown by collection
+ - `racerMemStats.Model.getFieldSizes(model)` will give you memory breakdown by collection for a field (useful for fields common to all documents)
+ - `racerMemStats.Model.getDocumentSizes(model)` will give you memory breakdown by document
+ - `racerMemStats.Collection.getFieldSizes(model.get('collectionName'))` will give you memory breakdown by field for a given collection
+ - `racerMemStats.Collection.getDocumentSizes(model.get('collectionName'))` will give you memory breakdown by document for a given collection
