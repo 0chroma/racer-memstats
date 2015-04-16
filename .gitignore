@@ -1,4 +1,5 @@
 browser.js
+index.js
 *.swp
 node_modules
 npm-debug.log
